@@ -31,6 +31,7 @@ module.exports = {
   },
 
   // Agregar un producto a una categoría existente
+<<<<<<< HEAD
 addProductToCategory: async (req, res) => {
   const { categoryId, productId } = req.params;
 
@@ -64,6 +65,35 @@ addProductToCategory: async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 },
+=======
+  addProductToCategory: async (req, res) => {
+    const { categoryId, productId } = req.params;
+
+    // Verificar si los parámetros existen
+    if (!categoryId || !productId) {
+      return res.status(400).json({ error: 'Faltan parámetros obligatorios: categoryId, productId' });
+    }
+
+    try {
+      const category = await Category.findById(categoryId);
+      if (!category) {
+        return res.status(404).json({ message: 'Categoría no encontrada' });
+      }
+
+      // Verificar si el producto existe
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({ message: 'Producto no encontrado' });
+      }
+
+      category.products.push(productId);
+      await category.save();
+      res.json(category);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+>>>>>>> 0abc643c81d293d96698fef95d49fa4675ce449f
 
   // Modificar una categoría existente
   updateCategory: async (req, res) => {

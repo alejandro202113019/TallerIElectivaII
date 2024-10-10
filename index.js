@@ -1,14 +1,24 @@
+<<<<<<< HEAD
 require('dotenv').config();
+=======
+>>>>>>> 0abc643c81d293d96698fef95d49fa4675ce449f
 const express = require('express');
 const path = require('path');
 const app = express();
 const connectDB = require('./drivers/db');
 const cors = require('cors');
 
+<<<<<<< HEAD
 
 const swaggerDocs = require('./swagger');
 
 app.set('PORT', process.env.PORT || 5000);
+=======
+// Swagger
+const swaggerDocs = require('./swagger');
+
+app.set('PORT', process.env.PORT || 4000);
+>>>>>>> 0abc643c81d293d96698fef95d49fa4675ce449f
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(cors());
