@@ -1,4 +1,3 @@
-// controllers/controll-categories.js
 const Category = require('./../models/category');
 const Product = require('./../models/product');
 
@@ -16,9 +15,14 @@ module.exports = {
   // Crear una nueva categoría y asignarle productos
   createCategory: async (req, res) => {
     try {
-      const { name, description, productIds } = req.body; // productIds es un array de IDs de productos
-      const category = new Category({ name, description, products: productIds });
+      const { name, description, productIds } = req.body;
 
+      // Validar que los parámetros necesarios existan
+      if (!name || !description) {
+        return res.status(400).json({ error: 'Faltan parámetros obligatorios: name, description' });
+      }
+
+      const category = new Category({ name, description, products: productIds || [] });
       await category.save();
       res.json(category);
     } catch (error) {
@@ -30,18 +34,83 @@ module.exports = {
   addProductToCategory: async (req, res) => {
     const { categoryId, productId } = req.params;
 
+    // Verificar si los parámetros existen
+    if (!categoryId || !productId) {
+      return res.status(400).json({ error: 'Faltan parámetros obligatorios: categoryId, productId' });
+    }
+
     try {
       const category = await Category.findById(categoryId);
       if (!category) {
         return res.status(404).json({ message: 'Categoría no encontrada' });
       }
 
+      // Verificar si el producto existe
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({ message: 'Producto no encontrado' });
+      }
+
       category.products.push(productId);
       await category.save();
-
       res.json(category);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
-  }
+  },
+
+  // Modificar una categoría existente
+  updateCategory: async (req, res) => {
+    const { id } = req.params;
+    const { name, description } = req.body;
+
+    // Validar que el ID de la categoría exista
+    if (!id) {
+      return res.status(400).json({ error: 'ID de la categoría no proporcionado' });
+    }
+
+    try {
+      const updatedCategory = await Category.findByIdAndUpdate(
+        id,
+        { name, description },
+        { new: true, runValidators: true }
+      );
+
+      if (!updatedCategory) {
+        return res.status(404).json({ message: 'Categoría no encontrada' });
+      }
+
+      res.json(updatedCategory);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+
+  // Eliminar una categoría existente
+  deleteCategory: async (req, res) => {
+    const { id } = req.params;
+
+    // Validar que el ID de la categoría exista
+    if (!id) {
+      return res.status(400).json({ error: 'ID de la categoría no proporcionado' });
+    }
+
+    try {
+      const deletedCategory = await Category.findByIdAndDelete(id);
+
+      if (!deletedCategory) {
+        return res.status(404).json({ message: 'Categoría no encontrada' });
+      }
+
+      // Eliminar la referencia a esta categoría en los productos asociados
+      await Product.updateMany(
+        { categories: id },
+        { $pull: { categories: id } }
+      );
+
+      res.json({ message: 'Categoría eliminada correctamente' });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
 };

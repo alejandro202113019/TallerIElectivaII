@@ -162,6 +162,60 @@
  *         description: Producto añadido a la categoría
  *       404:
  *         description: Producto o categoría no encontrados
+ *
+ * /categories/{id}:
+ *   put:
+ *     summary: Actualiza una categoría existente
+ *     tags: [Category]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría a actualizar
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nombre de la categoría
+ *               description:
+ *                 type: string
+ *                 description: Descripción de la categoría
+ *             required:
+ *               - name
+ *               - description
+ *     responses:
+ *       200:
+ *         description: Categoría actualizada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Category'
+ *       400:
+ *         description: Parámetros faltantes o inválidos
+ *       404:
+ *         description: Categoría no encontrada
+ *   delete:
+ *     summary: Elimina una categoría
+ *     tags: [Category]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría eliminada
+ *       404:
+ *         description: Categoría no encontrada
  */
 
 // routes/index.js
@@ -178,7 +232,9 @@ const {
 const { 
   getCategories, 
   createCategory, 
-  addProductToCategory 
+  addProductToCategory,
+  updateCategory, 
+  deleteCategory,
 } = require('./../controllers/controll-categories');
 
 // Rutas para productos
@@ -190,6 +246,8 @@ router.delete('/products/:id', deleteProduct);
 // Rutas para categorías
 router.get('/categories', getCategories);
 router.post('/categories', createCategory);
+router.put('/categories/:id', updateCategory); 
+router.delete('/categories/:id', deleteCategory);
 router.post('/categories/:categoryId/product/:productId', addProductToCategory);
 
 module.exports = router;
