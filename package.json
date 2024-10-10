@@ -7,19 +7,13 @@
     "start": "nodemon index.js"
   },
   "keywords": [],
-<<<<<<< HEAD
+
   "author": ["Camilo Correa", "Alejandro ", "Javier Ortiz"],
-=======
-  "author": "",
->>>>>>> 0abc643c81d293d96698fef95d49fa4675ce449f
   "license": "ISC",
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
-<<<<<<< HEAD
     "dotenv": "^16.4.5",
-=======
->>>>>>> 0abc643c81d293d96698fef95d49fa4675ce449f
     "express": "^4.21.0",
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.0",

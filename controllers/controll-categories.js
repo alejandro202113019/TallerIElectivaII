@@ -31,7 +31,7 @@ module.exports = {
   },
 
   // Agregar un producto a una categoría existente
-<<<<<<< HEAD
+
 addProductToCategory: async (req, res) => {
   const { categoryId, productId } = req.params;
 
@@ -65,7 +65,7 @@ addProductToCategory: async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 },
-=======
+
   addProductToCategory: async (req, res) => {
     const { categoryId, productId } = req.params;
 
@@ -92,9 +92,7 @@ addProductToCategory: async (req, res) => {
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
-  },
->>>>>>> 0abc643c81d293d96698fef95d49fa4675ce449f
-
+},
   // Modificar una categoría existente
   updateCategory: async (req, res) => {
     const { id } = req.params;
