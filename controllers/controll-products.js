@@ -11,6 +11,32 @@ module.exports = {
     }
   },
 
+  getProductById: async (req, res) => {
+    const { id } = req.params;
+  
+    // Validar que el ID del producto exista
+    if (!id) {
+      return res.status(400).json({ error: 'ID del producto no proporcionado' });
+    }
+  
+    try {
+      // Buscar el producto por ID
+      const product = await Product.findById(id);
+  
+      if (!product) {
+        return res.status(404).json({ message: 'Producto no encontrado' });
+      }
+  
+      // Enviar el producto encontrado como respuesta
+      res.json(product);
+    } catch (error) {
+      // Manejar errores
+      res.status(400).json({ error: error.message });
+    }
+  },
+  
+
+
   // Crear un nuevo producto
   createProduct: async (req, res) => {
     try {
@@ -28,7 +54,7 @@ module.exports = {
       res.status(400).json({ error: error.message });
     }
   },
-
+  
   // Modificar un producto existente
   updateProduct: async (req, res) => {
     const { id } = req.params;

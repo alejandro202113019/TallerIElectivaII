@@ -4,7 +4,7 @@ require('dotenv').config();
 
 
 const URI= process.env.DATABASE_URL;
-console.log('Ruta BD',URI)
+
 mongoose.set('strictQuery', false)
 
 async function connectDB() {

@@ -225,8 +225,9 @@ const { verificar } = require('../Middleware/Auth');
 const { 
   getProducts, 
   createProduct, 
+  getProductById,
   updateProduct, 
-  deleteProduct 
+  deleteProduct,
 } = require('../controllers/controll-products');
 
 const { 
@@ -251,6 +252,7 @@ router.use(verificar); // Aplica el middleware de autenticación a todas las rut
 
 // Rutas para productos
 router.get('/products', getProducts);
+router.get('/products/:id', getProductById);
 router.post('/products', createProduct);
 router.put('/products/:id', updateProduct);
 router.delete('/products/:id', deleteProduct);
