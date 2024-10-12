@@ -237,6 +237,12 @@ const {
   deleteCategory,
 } = require('./../controllers/controll-categories');
 
+const { 
+  createUsuario 
+} = require('./../controllers/controll-Auth');
+//Rutas para Usuarios
+router.post('/users', createUsuario);
+
 // Rutas para productos
 router.get('/products', getProducts);
 router.post('/products', createProduct);

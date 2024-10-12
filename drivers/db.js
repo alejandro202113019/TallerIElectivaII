@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 
 require('dotenv').config();
-//const URI = "mongodb://127.0.0.1:27017/foot"
+
 
 const URI= process.env.DATABASE_URL;
-
+console.log('Ruta BD',URI)
 mongoose.set('strictQuery', false)
 
 async function connectDB() {
