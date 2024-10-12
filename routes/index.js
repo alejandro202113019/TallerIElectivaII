@@ -218,16 +218,16 @@
  *         description: Categoría no encontrada
  */
 
-// routes/index.js
 const express = require('express');
 const router = express.Router();
+const { verificar } = require('../Middleware/Auth');
 
 const { 
   getProducts, 
   createProduct, 
   updateProduct, 
   deleteProduct 
-} = require('./../controllers/controll-products');
+} = require('../controllers/controll-products');
 
 const { 
   getCategories, 
@@ -235,13 +235,19 @@ const {
   addProductToCategory,
   updateCategory, 
   deleteCategory,
-} = require('./../controllers/controll-categories');
+} = require('../controllers/controll-categories');
 
 const { 
-  createUsuario 
-} = require('./../controllers/controll-Auth');
-//Rutas para Usuarios
+  createUsuario,
+  login 
+} = require('../controllers/controll-Auth');
+
+// Rutas públicas
 router.post('/users', createUsuario);
+router.post('/login', login);
+
+// Rutas protegidas
+router.use(verificar); // Aplica el middleware de autenticación a todas las rutas siguientes
 
 // Rutas para productos
 router.get('/products', getProducts);
