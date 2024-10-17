@@ -1,4 +1,68 @@
 /**
+ * * @swagger
+ * /users:
+ *   post:
+ *     summary: Crea un nuevo usuario
+ *     tags: [Autenticación]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *                 example: Juan Pérez
+ *               email:
+ *                 type: string
+ *                 example: juan.perez@ejemplo.com
+ *               password:
+ *                 type: string
+ *                 example: contraseñaSegura123
+ *     responses:
+ *       201:
+ *         description: Usuario creado exitosamente
+ *       400:
+ *         description: Solicitud incorrecta. Verificar los datos enviados.
+ *       500:
+ *         description: Error interno del servidor.
+ */
+
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Inicia sesión
+ *     tags: [Autenticación]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: juan.perez@ejemplo.com
+ *               password:
+ *                 type: string
+ *                 example: contraseñaSegura123
+ *     responses:
+ *       200:
+ *         description: Inicio de sesión exitoso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *       401:
+ *         description: Credenciales inválidas.
+ *       500:
+ *         description: Error interno del servidor.
  * @swagger
  * components:
  *   schemas:
