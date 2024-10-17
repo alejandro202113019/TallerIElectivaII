@@ -75,16 +75,53 @@
  *         description: Error al crear el producto
  *
  * /products/{id}:
+ *   get:
+ *     summary: Obtiene un producto por su ID
+ *     tags: [Product]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID del producto que se quiere obtener.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Producto encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: ID del producto no proporcionado o error en la solicitud
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "ID del producto no proporcionado"
+ *       404:
+ *         description: Producto no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Producto no encontrado"
  *   put:
  *     summary: Actualiza un producto
  *     tags: [Product]
  *     parameters:
  *       - in: path
  *         name: id
- *         schema:
- *           type: string
  *         required: true
  *         description: ID del producto
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -102,10 +139,10 @@
  *     parameters:
  *       - in: path
  *         name: id
- *         schema:
- *           type: string
  *         required: true
  *         description: ID del producto
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: Producto eliminado
@@ -147,16 +184,16 @@
  *     parameters:
  *       - in: path
  *         name: categoryId
- *         schema:
- *           type: string
  *         required: true
  *         description: ID de la categoría
- *       - in: path
- *         name: productId
  *         schema:
  *           type: string
+ *       - in: path
+ *         name: productId
  *         required: true
  *         description: ID del producto
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: Producto añadido a la categoría
@@ -170,10 +207,10 @@
  *     parameters:
  *       - in: path
  *         name: id
- *         schema:
- *           type: string
  *         required: true
  *         description: ID de la categoría a actualizar
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -207,16 +244,17 @@
  *     parameters:
  *       - in: path
  *         name: id
- *         schema:
- *           type: string
  *         required: true
  *         description: ID de la categoría
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: Categoría eliminada
  *       404:
  *         description: Categoría no encontrada
  */
+
 
 const express = require('express');
 const router = express.Router();
