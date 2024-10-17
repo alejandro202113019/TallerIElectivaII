@@ -13,13 +13,13 @@
  *             properties:
  *               nombre:
  *                 type: string
- *                 example: Juan Pérez
+ *                 example: Jairo Riaño
  *               email:
  *                 type: string
- *                 example: juan.perez@ejemplo.com
+ *                 example: jairo.riano@uptc.edu.co
  *               password:
  *                 type: string
- *                 example: contraseñaSegura123
+ *                 example: clave1234
  *     responses:
  *       201:
  *         description: Usuario creado exitosamente
@@ -44,10 +44,10 @@
  *             properties:
  *               email:
  *                 type: string
- *                 example: juan.perez@ejemplo.com
+ *                 example: jairo.riano@uptc.edu.co
  *               password:
  *                 type: string
- *                 example: contraseñaSegura123
+ *                 example: clave1234
  *     responses:
  *       200:
  *         description: Inicio de sesión exitoso
@@ -58,7 +58,7 @@
  *               properties:
  *                 token:
  *                   type: string
- *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MGFlYjQ2NzVkZGMwZGE2ZmZkYzcwNSIsImlhdCI6MTcyOTIwNzk1MCwiZXhwIjoxNzI5ODEyNzUwfQ.TRZwv7L4Nu2qnH1k7XSG8V2yyk9aPwW0Q9plv494CHw
  *       401:
  *         description: Credenciales inválidas.
  *       500:
